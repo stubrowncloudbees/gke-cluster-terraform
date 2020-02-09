@@ -1,0 +1,11 @@
+rbac:
+  create: true
+defaultBackend:
+  enabled: false
+controller:
+  ingressClass: "nginx"
+  scope:
+    enabled: "false"
+    namespace: cloudbees-core
+  service:
+    externalTrafficPolicy: "Local"

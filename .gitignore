@@ -10,3 +10,6 @@
 
 # account file
 *account.json
+
+.idea/
+ca/minica
