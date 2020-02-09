@@ -1,10 +1,8 @@
-# gke-cluster-terraform
-Sets up a managed auto-repairing, auto-upgrading, and auto-scaling on GKE using Terraform with Google Storage as the Terraform Remote Storage backend.
+# Install GKE CLuster
 
-See the [associated blog post](https://elastisys.com/2019/04/12/kubernetes-on-gke-from-scratch-using-terraform/) over at [elastisys.com](https://elastisys.com/).
-
+```
 export ENVIRONMENT=production
-$ terraform workspace new ${ENVIRONMENT}
+terraform workspace new ${ENVIRONMENT}
 
 export BUCKET_ID=...your ID goes here...
 gsutil versioning set on gs://${BUCKET_ID}
@@ -17,23 +15,10 @@ export PROJECT=gke-from-scratch
 export SERVICE_ACCOUNT=terraform
 gcloud projects add-iam-policy-binding ${PROJECT} --member serviceAccount:${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com --role roles/editor
 
-```
 export ENVIRONMENT=production
 terraform apply -var-file=${ENVIRONMENT}.tfvars
 ```
-OLD
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.28.0/deploy/static/mandatory.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.28.0/deploy/static/provider/cloud-generic.yaml
-```
-```
-kubectl patch deployment.apps/nginx-ingress-controller -p '{"spec":{"template":{"spec":{"nodeSelector":{"beta.kubernetes.io/os":"linux"}}}}}' -n ingress-nginx
-```
-```
-kubectl create clusterrolebinding cluster-admin-binding  --clusterrole cluster-admin  --user $(gcloud config get-value account)
-```
 
-NEW Per instruxctions
 
 * Set kubeconfig
 
@@ -41,6 +26,11 @@ NEW Per instruxctions
 gcloud container clusters get-credentials stu-brown-ps-cluster --region us-east1
 
 ```
+
+## Install Core and associated components 
+
+* Running ```install_all.sh``` will run all subsequent scripts
+
 * Install HELM
 ```
 #install_helm.sh
@@ -129,17 +119,12 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/ngin
 kubectl patch deployment.apps/nginx-ingress-controller -p '{"spec":{"template":{"spec":{"nodeSelector":{"kubernetes.io/os":null}}}}}' -n ingress-nginx
 kubectl patch deployment.apps/nginx-ingress-controller -p '{"spec":{"template":{"spec":{"nodeSelector":{"beta.kubernetes.io/os":"linux"}}}}}' -n ingress-nginx
 ```
-```
-
-
 
 * patch ingress replicas 
 ```
 #patch_replica_count.yaml
 kubectl patch deployment.apps/nginx-ingress-controller -p '{"spec": {"replicas": 3}}' -n ingress-nginx
 ```
-
-
 
 * Check/Create Certs and secret
 
@@ -161,9 +146,7 @@ if [ ! -e "$cFILE" ]; then
 fi
 
 echo "creating secret for ${DOMAIN_NAME}"
-
 kubectl create secret tls cloudbees-core-tls --key ~/CA/${DOMAIN_NAME}/key.pem --cert ~/CA/${DOMAIN_NAME}/cert.pem --namespace cloudbees-core
-
 
 ```
 
