@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 gcloud container clusters get-credentials stu-brown-ps-cluster --region us-east1
 ./install_helm.sh
 ./install_cluster_admin.sh
