@@ -1,4 +1,5 @@
-* Install Helm
+#!/usr/bin/env bash
+# Install Helm
 echo "install helm"
 # installs helm with bash commands for easier command line integration
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
