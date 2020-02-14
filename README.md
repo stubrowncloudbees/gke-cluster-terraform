@@ -1,8 +1,12 @@
 # Install GKE CLuster
 
+used stu-brown-ps
+
 ```
 export ENVIRONMENT=production
 terraform workspace new ${ENVIRONMENT}
+
+gcloud config set project stu-brown-ps
 
 export BUCKET_ID=...your ID goes here...
 gsutil versioning set on gs://${BUCKET_ID}
@@ -11,7 +15,7 @@ gsutil versioning get gs://${BUCKET_ID}
 gs://gke-from-scratch-terraform-state: Enabled
 
 
-export PROJECT=gke-from-scratch
+export PROJECT=stu-brown-ps
 export SERVICE_ACCOUNT=terraform
 gcloud projects add-iam-policy-binding ${PROJECT} --member serviceAccount:${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com --role roles/editor
 
