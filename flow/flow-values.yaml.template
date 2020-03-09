@@ -46,7 +46,7 @@ ingress:
 # This section is just an example that ingress can be configured with
 # certificate for TLS.
   certificate:
-    existingSecret:
+    existingSecret: 
     key:
     crt:
 
@@ -213,8 +213,8 @@ dois:
 # If the password is an empty string, then user 'admin' will not be created
 # and administrative access will not be granted.
     existingSecret:
-    adminPassword: admin
-    reportUserPassword: "changeme"
+    adminPassword: <add password>
+    reportUserPassword: "add password"
 
 # The heap size in MB for Elasticsearch and Logstash services.
   esRam: 1024
@@ -322,7 +322,7 @@ database:
 
   dbName: 'flow'
   dbUser: 'flow-user'
-  dbPassword: 'R5CrqMkE4wC3CGJz'
+  dbPassword: '<add password>'
 
 # Remote database port to connect to.
   dbPort: 3306
@@ -342,7 +342,7 @@ flowCredentials:
 # the 'CBF_SERVER_ADMIN_PASSWORD' key (recommended for production) or specify
 # the adminPassword.
   existingSecret:
-  adminPassword: "changeme"
+  adminPassword: "<add password>"
 
 #---------------------------------------------
 # Flow server license configuration optional section

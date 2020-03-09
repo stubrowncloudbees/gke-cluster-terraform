@@ -1,0 +1,13 @@
+flowCredentials:
+
+# Either specify the secret where the admin user password is stored under
+# the 'CBF_SERVER_ADMIN_PASSWORD' key (recommended for production) or specify
+# the adminPassword.
+  existingUser: "admin"
+  password: "<add password>"
+
+serverName: flow-server
+workspaceName: default
+trustedAgent: true
+
+

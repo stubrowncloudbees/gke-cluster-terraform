@@ -4,26 +4,27 @@
 helm install --namespace flow --name mysqlflow stable/mysql
 ```
 
-see mysql.md
+* Using values
 
 ```
-MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace flow mysqlflow -o jsonpath="{.data.mysql-root-password}" | base64 --decode; echo)
-echo $MYSQL_ROOT_PASSWORD
+helm install --name mysqlflow -f mysql.yaml --namespace flow stable/mysql
 ```
-1q5HbfBftZ
+
+* below is not needed if you have used the mysql.yaml file, this created the database and user
+
 ```
 kubectl run -i --tty ubuntu --image=ubuntu:16.04 -n flow --restart=Never -- bash -il
 apt-get update && apt-get install mysql-client -y
-mysql -h mysqlflow -p 1q5HbfBftZ
+mysql -h mysqlflow -p <password>
 
 ```
 
 
 
-```ç
+```
 mysql>
 mysql> CREATE DATABASE flow CHARACTER SET utf8 COLLATE utf8_general_ci;
-mysql> CREATE USER 'flow-user'@'%' IDENTIFIED BY 'R5CrqMkE4wC3CGJz';
+mysql> CREATE USER 'flow-user'@'%' IDENTIFIED BY '<enter password>';
 mysql> GRANT ALL PRIVILEGES ON * . * TO 'flow-user'@'%';
 
 ```
